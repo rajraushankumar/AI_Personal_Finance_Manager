@@ -1,44 +1,61 @@
+// Password Show / Hide
+
 const togglePassword = document.getElementById("togglePassword");
 const password = document.getElementById("password");
 
-togglePassword.addEventListener("click", function(){
+togglePassword.addEventListener("click", function () {
 
-    if(password.type === "password"){
+    if (password.type === "password") {
 
         password.type = "text";
+        this.classList.replace("fa-eye", "fa-eye-slash");
 
-        togglePassword.classList.remove("fa-eye");
-        togglePassword.classList.add("fa-eye-slash");
-
-    }else{
+    } else {
 
         password.type = "password";
-
-        togglePassword.classList.remove("fa-eye-slash");
-        togglePassword.classList.add("fa-eye");
+        this.classList.replace("fa-eye-slash", "fa-eye");
 
     }
 
 });
 
+// Confirm Password Show / Hide
+
 const toggleConfirmPassword = document.getElementById("toggleConfirmPassword");
 const confirmPassword = document.getElementById("confirmPassword");
 
-toggleConfirmPassword.addEventListener("click", function(){
+toggleConfirmPassword.addEventListener("click", function () {
 
-    if(confirmPassword.type === "password"){
+    if (confirmPassword.type === "password") {
 
         confirmPassword.type = "text";
+        this.classList.replace("fa-eye", "fa-eye-slash");
 
-        toggleConfirmPassword.classList.remove("fa-eye");
-        toggleConfirmPassword.classList.add("fa-eye-slash");
-
-    }else{
+    } else {
 
         confirmPassword.type = "password";
+        this.classList.replace("fa-eye-slash", "fa-eye");
 
-        toggleConfirmPassword.classList.remove("fa-eye-slash");
-        toggleConfirmPassword.classList.add("fa-eye");
+    }
+
+});
+
+// Password Match Validation
+
+const form = document.getElementById("registerForm");
+const error = document.getElementById("error");
+
+form.addEventListener("submit", function (e) {
+
+    if (password.value !== confirmPassword.value) {
+
+        e.preventDefault();
+
+        error.textContent = "Passwords do not match.";
+
+    } else {
+
+        error.textContent = "";
 
     }
 

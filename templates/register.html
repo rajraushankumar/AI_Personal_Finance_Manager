@@ -4,7 +4,6 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Register</title>
@@ -20,6 +19,7 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+    <!-- CSS -->
     <link rel="stylesheet"
         href="{{ url_for('static', filename='css/register.css') }}">
 
@@ -39,7 +39,7 @@
 
             <p>Join FinanceAI Today</p>
 
-            <form method="POST">
+            <form method="POST" id="registerForm" autocomplete="off">
 
                 <!-- Full Name -->
 
@@ -64,7 +64,8 @@
                     <input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Enter Email"
+                        autocomplete="off"
                         required>
 
                 </div>
@@ -79,7 +80,8 @@
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Enter Password"
+                        autocomplete="off"
                         required>
 
                     <i class="fa-solid fa-eye" id="togglePassword"></i>
@@ -97,18 +99,24 @@
                         id="confirmPassword"
                         name="confirm_password"
                         placeholder="Confirm Password"
-                        <p id="error" style="color:red; margin-top:10px;"></p>
+                        autocomplete="off"
                         required>
 
                     <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
 
                 </div>
 
+                <!-- Error Message -->
+
+                <p id="error" class="error-message"></p>
+
+                <!-- Button -->
+
                 <button type="submit">
 
                     <i class="fa-solid fa-user-plus"></i>
 
-                    Register
+                    Create Account
 
                 </button>
 
@@ -118,7 +126,7 @@
 
                 Already have an account?
 
-                <a href="/login">Login</a>
+                <a href="{{ url_for('login') }}">Login</a>
 
             </p>
 

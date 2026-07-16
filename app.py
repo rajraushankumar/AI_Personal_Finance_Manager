@@ -294,10 +294,14 @@ def register():
         name = request.form["name"]
         email = request.form["email"]
         password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+
+        if password != confirm_password:
+            return "Passwords do not match!"
 
         connection = sqlite3.connect("finance.db")
         cursor = connection.cursor()
-
+       
         # Check if email already exists
         cursor.execute(
             "SELECT * FROM users WHERE email=?",
