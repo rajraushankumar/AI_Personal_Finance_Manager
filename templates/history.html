@@ -74,6 +74,8 @@
 
                         <th>Source</th>
 
+                        <th>Action</th>
+
                         <th>Date</th>
 
                     </tr>
@@ -110,6 +112,19 @@
                                 {{ income[3] }}
 
                             </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <a href="/delete_income/{{ income[0] }}"
+                            class="delete-btn"
+                            onclick="return confirm('Are you sure you want to delete this income?')">
+
+                                🗑 Delete
+
+                            </a>
 
                         </td>
 

@@ -1,3 +1,6 @@
+import os
+
+print("Database Path:", os.path.abspath("finance.db"))
 import sqlite3
 
 # Create database connection
@@ -12,9 +15,18 @@ CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     email TEXT UNIQUE,
-    password TEXT
+    password TEXT,
+    profile_photo TEXT           
 )
 """)
+
+# Add profile photo column to Users table
+try:
+    cursor.execute(
+        "ALTER TABLE users ADD COLUMN profile_photo TEXT"
+    )
+except sqlite3.OperationalError:
+    print("Profile photo column already exists")
 
 # Create Income Table
 cursor.execute("""

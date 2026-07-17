@@ -77,6 +77,8 @@
 
                         <th>Category</th>
 
+                        <th>Action</th>
+
                         <th>Date</th>
 
                     </tr>
@@ -113,6 +115,20 @@
                                 {{ expense[3] }}
 
                             </span>
+
+                        </td>
+
+                    
+
+                        <td>
+
+                            <a href="/delete_expense/{{ expense[0] }}"
+                            class="delete-btn"
+                            onclick="return confirm('Are you sure you want to delete this expense?')">
+
+                                🗑 Delete
+
+                            </a>
 
                         </td>
 

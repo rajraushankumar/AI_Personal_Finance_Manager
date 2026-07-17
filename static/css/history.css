@@ -160,3 +160,36 @@ td i {
     margin-right: 8px;
 
 }
+
+
+/* Delete Button */
+
+.delete-btn {
+
+    display: inline-block;
+
+    background: #ef4444;
+
+    color: white;
+
+    padding: 8px 14px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+
+}
+
+.delete-btn:hover {
+
+    background: #dc2626;
+
+    transform: scale(1.05);
+
+}

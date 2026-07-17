@@ -1,0 +1,297 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+
+    font-family: "Poppins", sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ecfdf5,
+            #d1fae5,
+            #f0fdf4
+        );
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
+
+.income-container {
+
+    width: 100%;
+
+    padding: 30px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.income-card {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    background: rgba(255, 255, 255, 0.95);
+
+    padding: 40px;
+
+    border-radius: 22px;
+
+    box-shadow:
+
+        0 20px 45px rgba(0, 0, 0, 0.12);
+
+    text-align: center;
+
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.income-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background: #dcfce7;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    color: #16a34a;
+
+    font-size: 32px;
+
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.income-card h1 {
+
+    color: #166534;
+
+    font-size: 30px;
+
+    margin-bottom: 5px;
+
+}
+
+
+.subtitle {
+
+    color: #6b7280;
+
+    font-size: 14px;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+
+    text-align: left;
+
+    margin-bottom: 22px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: #374151;
+
+}
+
+
+.form-group label i {
+
+    color: #16a34a;
+
+    margin-right: 6px;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-family: "Poppins", sans-serif;
+
+    outline: none;
+
+    transition: 0.3s;
+
+}
+
+
+.form-group input:focus {
+
+    border-color: #16a34a;
+
+    box-shadow:
+
+        0 0 0 3px rgba(22, 163, 74, 0.15);
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #16a34a;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    font-family: "Poppins", sans-serif;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+button:hover {
+
+    background: #15803d;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+
+        0 8px 18px rgba(22, 163, 74, 0.3);
+
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-btn {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    color: #16a34a;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+
+.back-btn:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+
+    .income-card {
+
+        padding: 28px 22px;
+
+    }
+
+    .income-card h1 {
+
+        font-size: 25px;
+
+    }
+
+}

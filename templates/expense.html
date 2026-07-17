@@ -7,62 +7,157 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Add Expense</title>
+    <title>Add Expense | FinanceAI</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Expense CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/expense.css') }}">
 
 </head>
 
 <body>
 
-    <h1>💸 Add Expense</h1>
+    <div class="expense-page">
 
-    <form method="POST">
+        <!-- Back Button -->
 
-        <label>Amount</label><br>
+        <a href="/dashboard" class="back-btn">
 
-        <input
-            type="number"
-            name="amount"
-            required>
+            <i class="fa-solid fa-arrow-left"></i>
 
-        <br><br>
+            Back to Dashboard
 
-
-        <label>Category</label><br>
-
-        <input
-            type="text"
-            name="category"
-            placeholder="Food, Travel, Shopping"
-            required>
-
-        <br><br>
+        </a>
 
 
-        <label>Date</label><br>
+        <!-- Expense Card -->
 
-        <input
-            type="date"
-            name="date"
-            required>
+        <div class="expense-card">
 
-        <br><br>
+            <div class="expense-icon">
+
+                <i class="fa-solid fa-money-bill-transfer"></i>
+
+            </div>
 
 
-        <button type="submit">
+            <h1>Add Expense</h1>
 
-            Save Expense
+            <p class="subtitle">
 
-        </button>
+                Track your spending and manage your finances better.
 
-    </form>
+            </p>
 
-    <br>
 
-    <a href="/dashboard">
+            <form method="POST">
 
-        ⬅ Back to Dashboard
 
-    </a>
+                <!-- Amount -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        Amount
+
+                    </label>
+
+                    <div class="input-box">
+
+                        <span>₹</span>
+
+                        <input
+                            type="number"
+                            name="amount"
+                            placeholder="Enter amount"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-tags"></i>
+
+                        Category
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="category"
+                        placeholder="Food, Travel, Shopping"
+                        required>
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        name="date"
+                        required>
+
+                </div>
+
+
+                <!-- Submit -->
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Save Expense
+
+                </button>
+
+            </form>
+
+
+            <!-- Expense History -->
+
+            <a href="/expense_history" class="history-link">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                View Expense History
+
+            </a>
+
+        </div>
+
+    </div>
 
 </body>
 

@@ -4,64 +4,132 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Add Income</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Income CSS -->
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='css/income.css') }}">
 
 </head>
 
 <body>
 
-    <h1>💰 Add Income</h1>
+    <div class="income-container">
 
-    <form method="POST">
+        <div class="income-card">
 
-        <label>Amount</label><br>
+            <div class="income-icon">
 
-        <input
-            type="number"
-            name="amount"
-            required>
+                <i class="fa-solid fa-money-bill-trend-up"></i>
 
-        <br><br>
+            </div>
 
+            <h1>Add Income</h1>
 
-        <label>Source</label><br>
-
-        <input
-            type="text"
-            name="source"
-            required>
-
-        <br><br>
+            <p class="subtitle">
+                Add your income details below
+            </p>
 
 
-        <label>Date</label><br>
+            <form method="POST">
 
-        <input
-            type="date"
-            name="date"
-            required>
+                <!-- Amount -->
 
-        <br><br>
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                        Amount
+
+                    </label>
+
+                    <input
+                        type="number"
+                        name="amount"
+                        placeholder="Enter amount"
+                        required>
+
+                </div>
 
 
-        <button type="submit">
+                <!-- Source -->
 
-            Save Income
+                <div class="form-group">
 
-        </button>
+                    <label>
 
-    </form>
+                        <i class="fa-solid fa-briefcase"></i>
 
-    <br>
+                        Income Source
 
-    <a href="/dashboard">
+                    </label>
 
-        ⬅ Back to Dashboard
+                    <input
+                        type="text"
+                        name="source"
+                        placeholder="Salary, Freelance, Business"
+                        required>
 
-    </a>
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label>
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        Date
+
+                    </label>
+
+                    <input
+                        type="date"
+                        name="date"
+                        required>
+
+                </div>
+
+
+                <button type="submit">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    Save Income
+
+                </button>
+
+            </form>
+
+
+            <a href="/dashboard" class="back-btn">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
 
 </body>
 

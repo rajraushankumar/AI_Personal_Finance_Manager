@@ -1,0 +1,179 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #fef2f2, #fff7ed);
+    min-height: 100vh;
+}
+
+.expense-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+}
+
+.back-btn {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    text-decoration: none;
+    color: #475569;
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: #ef4444;
+    transform: translateX(-4px);
+}
+
+.expense-card {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.10);
+}
+
+.expense-icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 18px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fee2e2;
+    color: #ef4444;
+    font-size: 30px;
+}
+
+.expense-card h1 {
+    text-align: center;
+    font-size: 30px;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.form-group label i {
+    color: #ef4444;
+    margin-right: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding-left: 16px;
+    transition: 0.3s;
+}
+
+.input-box span {
+    color: #ef4444;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.input-box input {
+    border: none;
+}
+
+.input-box:focus-within {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(239, 68, 68, 0.25);
+}
+
+.history-link {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.history-link:hover {
+    color: #ef4444;
+}
+
+@media (max-width: 600px) {
+
+    .expense-page {
+        padding: 20px;
+    }
+
+    .expense-card {
+        padding: 28px 22px;
+    }
+
+    .back-btn {
+        position: static;
+        margin-bottom: 20px;
+    }
+
+}
