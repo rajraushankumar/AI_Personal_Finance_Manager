@@ -1,45 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Expense History</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Expense</title>
+
 </head>
 
 <body>
 
-<h1>💸 Expense History</h1>
+    <h1>💸 Add Expense</h1>
 
-<table border="1" cellpadding="10">
+    <form method="POST">
 
-<tr>
+        <label>Amount</label><br>
 
-<th>ID</th>
-<th>Username</th>
-<th>Amount</th>
-<th>Category</th>
+        <input
+            type="number"
+            name="amount"
+            required>
 
-</tr>
+        <br><br>
 
-{% for expense in expenses %}
 
-<tr>
+        <label>Category</label><br>
 
-<td>{{ expense[0] }}</td>
-<td>{{ expense[1] }}</td>
-<td>{{ expense[2] }}</td>
-<td>{{ expense[3] }}</td>
+        <input
+            type="text"
+            name="category"
+            placeholder="Food, Travel, Shopping"
+            required>
 
-</tr>
+        <br><br>
 
-{% endfor %}
 
-</table>
+        <label>Date</label><br>
 
-<br>
+        <input
+            type="date"
+            name="date"
+            required>
 
-<a href="/dashboard">
-⬅ Back to Dashboard
-</a>
+        <br><br>
+
+
+        <button type="submit">
+
+            Save Expense
+
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/dashboard">
+
+        ⬅ Back to Dashboard
+
+    </a>
 
 </body>
 

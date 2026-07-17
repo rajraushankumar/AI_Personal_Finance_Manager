@@ -103,7 +103,7 @@ def income():
 
         amount = request.form["amount"]
         source = request.form["source"]
-
+        date = request.form["date"]
         print("Amount =", amount)
         print("Source =", source)
 
@@ -112,10 +112,10 @@ def income():
 
         cursor.execute(
             """
-            INSERT INTO income(username, amount, source)
-            VALUES (?, ?, ?)
+            INSERT INTO income(username, amount, source, date)
+            VALUES (?, ?, ?, ?)
             """,
-            (session["username"], amount, source)
+            (session["username"], amount, source, date)
         )
 
         connection.commit()

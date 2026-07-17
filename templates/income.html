@@ -1,8 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Add Income</title>
+
 </head>
 
 <body>
@@ -12,18 +18,50 @@
     <form method="POST">
 
         <label>Amount</label><br>
-        <input type="number" name="amount" required><br><br>
+
+        <input
+            type="number"
+            name="amount"
+            required>
+
+        <br><br>
+
 
         <label>Source</label><br>
-        <input type="text" name="source" required><br><br>
 
-        <button type="submit">Save Income</button>
+        <input
+            type="text"
+            name="source"
+            required>
+
+        <br><br>
+
+
+        <label>Date</label><br>
+
+        <input
+            type="date"
+            name="date"
+            required>
+
+        <br><br>
+
+
+        <button type="submit">
+
+            Save Income
+
+        </button>
 
     </form>
 
     <br>
 
-    <a href="/dashboard">⬅ Back to Dashboard</a>
+    <a href="/dashboard">
+
+        ⬅ Back to Dashboard
+
+    </a>
 
 </body>
 
