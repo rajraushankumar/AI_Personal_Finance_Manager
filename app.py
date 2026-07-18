@@ -3,7 +3,11 @@ import os
 print("Database Path:", os.path.abspath("finance.db"))
 import sqlite3
 import os
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, send_file,  Response
+from flask import send_file
+from io import BytesIO
+from reportlab.platypus import SimpleDocTemplate, Paragraph
+from reportlab.lib.styles import getSampleStyleSheet
 from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/images"
@@ -65,7 +69,6 @@ def dashboard():
 
     # ---------------- TOTAL INCOME ----------------
 
-    # ---------------- TOTAL INCOME ----------------
 
     cursor.execute(
         "SELECT SUM(amount) FROM income WHERE username=?",
@@ -107,6 +110,33 @@ def dashboard():
 
     balance = income - expense
 
+        # ---------------- AI INSIGHT ----------------
+
+    if income == 0:
+
+        insight = "⚠ Add your income to start financial tracking."
+
+    elif expense == 0:
+
+        insight = "🎉 Great! You haven't added any expense yet."
+
+    elif expense > income:
+
+        insight = "⚠ Your expenses are greater than your income."
+
+    elif balance >= income * 0.5:
+
+        insight = "💰 Excellent! You are saving more than 50% of your income."
+
+    elif balance >= income * 0.2:
+
+        insight = "👍 Good job! Your savings are on the right track."
+
+    else:
+
+        insight = "⚠ Try reducing unnecessary expenses to increase savings."
+
+
 
     print("SESSION USERNAME =", session["username"])
     print("PROFILE PHOTO =", profile_photo)
@@ -118,8 +148,12 @@ def dashboard():
         income=float(income),
         expense=float(expense),
         balance=float(balance),
-        profile_photo=profile_photo
+        profile_photo=profile_photo,
+        insight=insight
     )
+
+
+
 # ---------------- PROFILE ----------------
 @app.route("/profile", methods=["GET", "POST"])
 def profile():
@@ -401,30 +435,203 @@ def report():
 
     balance = income - expense
 
-    # ---------------- AI INSIGHT ----------------
-
-    if expense == 0:
-
-        insight = "You have not added any expenses yet. Start tracking your spending."
-
-    elif expense > income:
-
-        insight = "⚠️ Your expenses are higher than your income. Try to control unnecessary spending."
-
-    elif balance > income * 0.5:
-
-        insight = "🎉 Excellent! You are saving more than 50% of your income."
-
-    else:
-
-        insight = "👍 Your finances look stable. Keep tracking your daily expenses."
-
     return render_template(
         "report.html",
         income=income,
         expense=expense,
         balance=balance
     )
+
+@app.route("/download_report")
+def download_report():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    connection = sqlite3.connect("finance.db")
+    cursor = connection.cursor()
+
+    cursor.execute(
+        "SELECT SUM(amount) FROM income WHERE username=?",
+        (session["username"],)
+    )
+    income = cursor.fetchone()[0] or 0
+
+    cursor.execute(
+        "SELECT SUM(amount) FROM expense WHERE username=?",
+        (session["username"],)
+    )
+    expense = cursor.fetchone()[0] or 0
+
+    connection.close()
+
+    balance = income - expense
+
+    pdf = BytesIO()
+
+    doc = SimpleDocTemplate(pdf)
+
+    styles = getSampleStyleSheet()
+
+    story = []
+
+    story.append(Paragraph("<b>AI Personal Finance Report</b>", styles["Title"]))
+    story.append(Paragraph(f"User : {session['username']}", styles["Normal"]))
+    story.append(Paragraph(f"Total Income : ₹{income}", styles["Normal"]))
+    story.append(Paragraph(f"Total Expense : ₹{expense}", styles["Normal"]))
+    story.append(Paragraph(f"Balance : ₹{balance}", styles["Normal"]))
+
+    doc.build(story)
+
+    pdf.seek(0)
+
+    return send_file(
+        pdf,
+        download_name="Finance_Report.pdf",
+        as_attachment=True,
+        mimetype="application/pdf"
+    )
+
+    # ---------------- AI SUGGESTION ----------------
+@app.route("/ai")
+def ai():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    connection = sqlite3.connect("finance.db")
+    cursor = connection.cursor()
+
+    # Total Income
+    cursor.execute(
+        "SELECT SUM(amount) FROM income WHERE username=?",
+        (session["username"],)
+    )
+
+    income = cursor.fetchone()[0] or 0
+
+    # Total Expense
+    cursor.execute(
+        "SELECT SUM(amount) FROM expense WHERE username=?",
+        (session["username"],)
+    )
+
+    expense = cursor.fetchone()[0] or 0
+    # Highest Expense Category
+
+    cursor.execute(
+        """
+        SELECT category, SUM(amount)
+        FROM expense
+        WHERE username=?
+        GROUP BY category
+        ORDER BY SUM(amount) DESC
+        LIMIT 1
+        """,
+        (session["username"],)
+    )
+
+    highest = cursor.fetchone()
+
+    if highest:
+
+        category = highest[0]
+        spent = highest[1]
+
+    else:
+
+        category = "None"
+        spent = 0
+
+    connection.close()
+
+    saving = income - expense
+
+    # AI Suggestion
+
+    if income == 0:
+
+        suggestion = "⚠ No income found. Please add your income first."
+
+    elif expense > income:
+
+        suggestion = (
+            f"⚠ Your expenses are greater than your income.\n"
+            f"You spent ₹{expense:.0f}.\n"
+            "Try reducing unnecessary expenses."
+        )
+
+    elif saving >= income * 0.5:
+
+        suggestion = (
+            f"🎉 Great Job!\n"
+            f"You saved ₹{saving:.0f}.\n"
+            "Keep investing and continue this habit."
+        )
+
+    elif saving >= income * 0.2:
+
+        suggestion = (
+            f"👍 Good!\n"
+            f"You saved ₹{saving:.0f}.\n"
+            "Try increasing your savings."
+        )
+
+    else:
+
+        suggestion = (
+            f"⚠ Highest spending is on '{category}' "
+            f"(₹{spent:.0f}).\n"
+            "Try reducing this expense."
+        )
+
+    return render_template(
+        "ai.html",
+        income=income,
+        expense=expense,
+        saving=saving,
+        category=category,
+        spent=spent,
+        suggestion=suggestion
+    )
+
+# ---------------- EXPORT CSV ----------------
+@app.route("/export_csv")
+def export_csv():
+
+    if "username" not in session:
+        return redirect(url_for("login"))
+
+    connection = sqlite3.connect("finance.db")
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        SELECT amount, source, date
+        FROM income
+        WHERE username=?
+        """,
+        (session["username"],)
+    )
+
+    rows = cursor.fetchall()
+
+    connection.close()
+
+    output = "Amount,Source,Date\n"
+
+    for row in rows:
+        output += f"{row[0]},{row[1]},{row[2]}\n"
+
+    return Response(
+        output,
+        mimetype="text/csv",
+        headers={
+            "Content-Disposition":
+            "attachment; filename=income_report.csv"
+        }
+    )
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

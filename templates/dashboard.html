@@ -124,20 +124,7 @@
 
     </section>
 
-        <!-- ================= FINANCIAL OVERVIEW ================= -->
-
-    <section class="chart-section">
-
-        <h2>Financial Overview</h2>
-
-        <div class="chart-card">
-
-            <canvas id="financeChart"></canvas>
-
-        </div>
-
-    </section>
-
+       
     <!-- ================= QUICK ACTIONS ================= -->
 
     <section class="quick-actions">
@@ -147,54 +134,73 @@
         <div class="action-grid">
 
             <a href="/income" class="action-card">
-
                 <i class="fa-solid fa-plus"></i>
-
                 <h3>Add Income</h3>
-
             </a>
 
             <a href="/expense" class="action-card">
-
                 <i class="fa-solid fa-minus"></i>
-
                 <h3>Add Expense</h3>
-
             </a>
 
             <a href="/history" class="action-card">
-
                 <i class="fa-solid fa-clock-rotate-left"></i>
-
                 <h3>Income History</h3>
-
             </a>
 
             <a href="/expense_history" class="action-card">
-
                 <i class="fa-solid fa-receipt"></i>
-
                 <h3>Expense History</h3>
-
             </a>
 
             <a href="/balance" class="action-card">
-
                 <i class="fa-solid fa-wallet"></i>
-
                 <h3>View Balance</h3>
-
             </a>
 
             <a href="/report" class="action-card">
-
                 <i class="fa-solid fa-chart-pie"></i>
-
                 <h3>Monthly Report</h3>
-
             </a>
 
-           
+            <a href="/ai" class="action-card">
+                <i class="fa-solid fa-robot"></i>
+                <h3>AI Suggestion</h3>
+            </a>
+
+            <a href="/export_csv" class="action-card">
+                <i class="fa-solid fa-file-csv"></i>
+                <h3>Export CSV</h3>
+            </a>
+
+        </div>
+
+    </section>
+     <!-- ================= FINANCIAL OVERVIEW ================= -->
+
+    <section class="charts-container">
+
+        <div class="chart-section">
+
+            <h2>Financial Overview</h2>
+
+            <div class="chart-card">
+
+                <canvas id="financeChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <div class="chart-section">
+
+            <h2>Expense Distribution</h2>
+
+            <div class="chart-card">
+
+                <canvas id="expenseChart"></canvas>
+
+            </div>
 
         </div>
 
@@ -317,6 +323,48 @@ new Chart(ctx, {
             }
 
         }
+
+    }
+
+});
+
+const expenseCtx = document.getElementById("expenseChart");
+
+new Chart(expenseCtx, {
+
+    type: "pie",
+
+    data: {
+
+        labels: ["Income", "Expense"],
+
+        datasets: [{
+
+            data: [
+
+                Number("{{ income }}"),
+
+                Number("{{ expense }}")
+
+            ],
+
+            backgroundColor: [
+
+                "#22c55e",
+
+                "#ef4444"
+
+            ]
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
 
     }
 
