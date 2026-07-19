@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet"
-    href="{{ url_for('static', filename='css/budget.css') }}">
+        href="{{ url_for('static', filename='css/budget.css') }}">
 
 </head>
 
@@ -37,9 +37,7 @@
             required>
 
         <button type="submit">
-
             Save Budget
-
         </button>
 
     </form>
@@ -54,16 +52,31 @@
 
         <p><strong>Remaining :</strong> ₹{{ remaining }}</p>
 
-        <p><strong>Used :</strong> {{ percent }}%</p>
+
+        <!-- Progress Bar -->
+        <div class="progress-box">
+
+            <div class="progress">
+
+                <div class="progress-fill"
+                    style="width: {{ percent }}%;">
+
+                </div>
+
+            </div>
+
+            <p class="progress-text">
+                {{ percent }}% Used
+            </p>
+
+        </div>
 
         <h3>{{ status }}</h3>
 
     </div>
 
     <a href="/dashboard" class="back">
-
         ⬅ Back to Dashboard
-
     </a>
 
 </div>

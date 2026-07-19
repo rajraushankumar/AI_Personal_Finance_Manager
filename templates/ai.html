@@ -107,14 +107,49 @@
                 AI Suggestion
 
             </h2>
+            <pre class="ai-text">
 
-            <p>
+            {{ suggestion }}
 
-                {{ suggestion }}
-
-            </p>
-
+            </pre>
+            
         </div>
+
+        <!-- AI Analytics -->
+
+<div class="grid">
+
+    <div class="card">
+
+        <i class="fa-solid fa-percent icon saving"></i>
+
+        <h3>Saving Rate</h3>
+
+        <p>{{ saving_percent }}%</p>
+
+    </div>
+
+    <div class="card">
+
+        <i class="fa-solid fa-star icon income"></i>
+
+        <h3>Financial Health</h3>
+
+        <p>{{ rating }}</p>
+
+    </div>
+
+    <div class="card">
+
+        <i class="fa-solid fa-piggy-bank icon category"></i>
+
+        <h3>Potential Saving</h3>
+
+        <p>₹{{ potential }}</p>
+
+    </div>
+
+</div>
 
         <!-- Back Button -->
 

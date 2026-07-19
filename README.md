@@ -1,95 +1,154 @@
 # 💰 AI Personal Finance Manager
 
-A simple and user-friendly Personal Finance Management System built using **Python, Flask, SQLite, HTML, CSS, and JavaScript**.
+A modern Personal Finance Management Web Application built using **Python, Flask, SQLite, HTML, CSS, and JavaScript**.
 
-This project helps users manage their daily income and expenses, monitor savings, generate reports, and receive basic AI-based financial suggestions.
+This application helps users manage their daily finances by tracking income, expenses, savings, monthly budget, and AI-based financial suggestions.
 
 ---
 
-## 🚀 Features
+# 🚀 Features
 
-- 🔐 User Registration & Login
-- 👤 Profile Photo Upload
-- 🌙 Dark Mode
-- 💵 Add Income
+- 👤 User Registration & Login
+- 🔐 Secure Password Hashing
+- 💰 Add Income
 - 💸 Add Expense
-- ✏ Edit Income & Expense
-- 🗑 Delete Income & Expense
-- 📊 Dashboard with Financial Overview
-- 📈 Charts (Bar Chart & Pie Chart)
-- 🤖 AI Financial Suggestion
-- 💰 Budget Planner
-- 📄 Monthly Financial Report
-- 📥 Download Report as PDF
-- 📤 Export Income Data as CSV
 - 📜 Income History
 - 📜 Expense History
-- ⚠ Custom 404 Error Page
-- 📱 Responsive User Interface
+- ✏️ Edit Income & Expense
+- 🗑️ Delete Income & Expense
+- 📊 Dashboard with Charts
+- 🤖 AI Financial Advisor
+- 💵 Budget Planner
+- 📈 Budget Progress Tracking
+- 🌙 Dark Mode
+- 👤 Profile Photo Upload
+- 📄 Export Report as PDF
+- 📥 Export Income as CSV
+- 📱 Fully Responsive Design
+- ❌ Custom 404 Error Page
 
 ---
 
-## 🛠 Technologies Used
+# 🛠️ Technologies Used
 
-### Backend
 - Python
 - Flask
-- SQLite
-
-### Frontend
+- SQLite3
 - HTML5
 - CSS3
 - JavaScript
-
-### Libraries
 - Chart.js
-- ReportLab
-- Werkzeug
+- Font Awesome
 
 ---
 
-## 📷 Project Screens
+# 📂 Project Structure
 
-- Login Page
-- Register Page
-- Dashboard
-- Income Page
-- Expense Page
-- Income History
-- Expense History
-- Budget Planner
-- AI Financial Advisor
-- Monthly Report
+```text
+AI_Personal_Finance_Manager/
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   ├── images/
+│
+├── templates/
+│
+├── screenshots/
+│
+├── finance.db
+├── app.py
+├── requirements.txt
+├── README.md
+```
 
 ---
 
-## ⚙ Installation
+# 📸 Project Screenshots
 
-### Clone Repository
+## 🔐 Login Page
+
+![Login](screenshots/login.png)
+
+---
+
+## 📝 Register Page
+
+![Register](screenshots/register.png)
+
+---
+
+## 📊 Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+## 💰 Income History
+
+![Income](screenshots/income_history.png)
+
+---
+
+## 💸 Expense History
+
+![Expense](screenshots/expense_history.png)
+
+---
+
+## 💵 Budget Planner
+
+![Budget](screenshots/budget.png)
+
+---
+
+## 🤖 AI Financial Advisor
+
+![AI Advisor](screenshots/ai_advisor.png)
+
+---
+
+# ⚙️ Installation
+
+Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/AI-Personal-Finance-Manager.git
+git clone https://github.com/your-username/AI_Personal_Finance_Manager.git
 ```
 
-### Open Project
+Go to project folder
 
 ```bash
-cd AI-Personal-Finance-Manager
+cd AI_Personal_Finance_Manager
 ```
 
-### Install Dependencies
+Create Virtual Environment
 
 ```bash
-pip install flask reportlab werkzeug
+python -m venv venv
 ```
 
-### Run Project
+Activate Virtual Environment
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the Application
 
 ```bash
 python app.py
 ```
 
-Open your browser and visit
+Open Browser
 
 ```
 http://127.0.0.1:5000
@@ -97,62 +156,27 @@ http://127.0.0.1:5000
 
 ---
 
-## 📂 Project Structure
+# 🎯 Future Improvements
 
-```
-AI_Personal_Finance_Manager/
-
-│
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-│
-├── templates/
-│
-├── finance.db
-├── app.py
-├── README.md
-└── requirements.txt
-```
-
----
-
-## 🤖 AI Suggestion Logic
-
-The application provides simple financial suggestions based on:
-
-- Total Income
-- Total Expense
-- Savings
-- Highest Expense Category
-- Monthly Budget
-
-This helps users understand their spending habits and improve financial planning.
-
----
-
-## 📌 Future Improvements
-
-- Search Transactions
-- Monthly Filter
 - Email Notifications
-- Password Reset
+- Expense Prediction
+- Monthly Analytics
 - Multi-language Support
-- Cloud Database Integration
+- Cloud Database
+- AI Expense Forecasting
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-Rajraushan Kumar
+**Rajraushan**
 
 BCA (Data Science & AI)
 
-Frontend Developer | Python & Flask Learner
+Python | Flask | HTML | CSS | JavaScript
 
 ---
 
-## 📄 License
+# ⭐ If you like this project
 
-This project is created for learning purposes and personal portfolio.
+Please consider giving this repository a ⭐ on GitHub.

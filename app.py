@@ -9,6 +9,13 @@ from io import BytesIO
 from reportlab.platypus import SimpleDocTemplate, Paragraph
 from reportlab.lib.styles import getSampleStyleSheet
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
+
+def allowed_file(filename):
+    return "." in filename and \
+        filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = "static/images"
 app.secret_key = "my_secret_key"
@@ -164,21 +171,13 @@ def profile():
     connection = sqlite3.connect("finance.db")
     cursor = connection.cursor()
 
-    # Get current user
-    cursor.execute(
-        "SELECT id, profile_photo FROM users WHERE name=?",
-        (session["username"],)
-    )
-
-    user = cursor.fetchone()
-
     if request.method == "POST":
 
         photo = request.files["profile_photo"]
 
-        if photo and photo.filename != "":
+        if photo and allowed_file(photo.filename):
 
-            filename = photo.filename
+            filename = secure_filename(photo.filename)
 
             photo.save(
                 os.path.join(
@@ -188,22 +187,19 @@ def profile():
             )
 
             cursor.execute(
-                "SELECT id, profile_photo FROM users WHERE id=?",
-                (session["user_id"],)
+                """
+                UPDATE users
+                SET profile_photo=?
+                WHERE id=?
+                """,
+                (filename, session["user_id"])
             )
+
             connection.commit()
 
     connection.close()
 
-    return redirect(url_for("dashboard"))           
-# ---------------- LOGOUT ----------------
-@app.route("/logout")
-def logout():
-
-    session.pop("username", None)
-
-    return redirect(url_for("login"))
-
+    return redirect(url_for("dashboard"))
 
 # ---------------- INCOME ----------------
 @app.route("/income", methods=["GET", "POST"])
@@ -633,54 +629,68 @@ def ai():
 
     saving = income - expense
 
-    # AI Suggestion
+    # Saving Percentage
+    if income > 0:
+        saving_percent = round((saving / income) * 100, 1)
+    else:
+        saving_percent = 0
+
+    # Financial Health Rating
+    if saving_percent >= 50:
+        rating = "⭐⭐⭐⭐⭐ Excellent"
+    elif saving_percent >= 30:
+        rating = "⭐⭐⭐⭐ Good"
+    elif saving_percent >= 15:
+        rating = "⭐⭐⭐ Average"
+    else:
+        rating = "⭐⭐ Needs Improvement"
+
+    # Potential Savings
+    potential = round(spent * 0.10, 2)
+
+   # ---------------- AI Suggestion ----------------
 
     if income == 0:
 
-        suggestion = "⚠ No income found. Please add your income first."
+        suggestion = (
+            "⚠ No income found.\n"
+            "Please add your income first."
+        )
 
     elif expense > income:
 
         suggestion = (
-            f"⚠ Your expenses are greater than your income.\n"
-            f"You spent ₹{expense:.0f}.\n"
-            "Try reducing unnecessary expenses."
-        )
-
-    elif saving >= income * 0.5:
-
-        suggestion = (
-            f"🎉 Great Job!\n"
-            f"You saved ₹{saving:.0f}.\n"
-            "Keep investing and continue this habit."
-        )
-
-    elif saving >= income * 0.2:
-
-        suggestion = (
-            f"👍 Good!\n"
-            f"You saved ₹{saving:.0f}.\n"
-            "Try increasing your savings."
+            f"🚨 Financial Alert!\n\n"
+            f"You spent ₹{expense:.0f} while your income is only ₹{income:.0f}.\n\n"
+            f"Highest spending: {category} (₹{spent:.0f})\n\n"
+            "Reduce unnecessary expenses immediately."
         )
 
     else:
 
         suggestion = (
-            f"⚠ Highest spending is on '{category}' "
-            f"(₹{spent:.0f}).\n"
-            "Try reducing this expense."
+            f"📊 AI Financial Report\n\n"
+            f"Highest Expense Category : {category}\n"
+            f"Amount Spent : ₹{spent:.0f}\n\n"
+            f"Potential Monthly Savings : ₹{potential:.0f}\n\n"
+            f"Saving Rate : {saving_percent}%\n"
+            f"Financial Health : {rating}\n\n"
+            "💡 Tip: Try reducing your highest expense category by at least 10% every month."
         )
 
-    return render_template(
-        "ai.html",
-        income=income,
-        expense=expense,
-        saving=saving,
-        category=category,
-        spent=spent,
-        suggestion=suggestion
-    )
-
+        return render_template(
+            "ai.html",
+            income=income,
+            expense=expense,
+            saving=saving,
+            category=category,
+            spent=spent,
+            suggestion=suggestion,
+            saving_percent=saving_percent,
+            rating=rating,
+            potential=potential
+        )
+                
 # ---------------- EXPORT CSV ----------------
 @app.route("/export_csv")
 def export_csv():
